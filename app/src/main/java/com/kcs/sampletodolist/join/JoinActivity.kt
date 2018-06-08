@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.kcs.sampletodolist.common.Constants
-import com.kcs.sampletodolist.dto.User
+import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.module.UserRealmManager
 import com.kcs.sampletodolist.R
 import io.reactivex.disposables.CompositeDisposable
@@ -79,7 +79,7 @@ class JoinActivity : AppCompatActivity() {
                 toast(getString(R.string.error_do_not_input_id))
                 return@setOnClickListener
             }
-            val user = userRealmManager.find(editID.text.toString(),Constants.USER_TABLE_ID, User::class.java)
+            val user = userRealmManager.find(editID.text.toString(),Constants.USER_TABLE_ID, UserDTO::class.java)
             if (user != null) {
                 toast(getString(R.string.error_exist_id))
                 isCheckID = false
@@ -99,11 +99,11 @@ class JoinActivity : AppCompatActivity() {
         val dataPassword = inputDataField[1].text.toString()
         val dataEmail = inputDataField[3].text.toString()
 
-        var user = User()
+        var user = UserDTO()
         user.id = dataID
         user.password = dataPassword
         user.email = dataEmail
-        userRealmManager.insertUser(User::class.java, user)
+        userRealmManager.insertUser(UserDTO::class.java, user)
     }
 
     /**

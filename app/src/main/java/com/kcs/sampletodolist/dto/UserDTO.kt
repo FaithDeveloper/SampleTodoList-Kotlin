@@ -8,7 +8,7 @@ import io.realm.annotations.RealmClass
  * Created by kcs on 2018. 5. 27..
  */
 @RealmClass
-open class User : RealmObject(){
+open class UserDTO : RealmObject(){
     @PrimaryKey
     open var num:Long = 0
     open var id:String? = null

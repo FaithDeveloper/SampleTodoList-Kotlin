@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         val useIdD = intent.getStringExtra(Constants.INTENT_DATA) as String
         txt_id.text = useIdD
 
-
+        initListener()
     }
 
-    private fun initLisetener(){
+    private fun initListener(){
         btn_logout.setOnClickListener({
             val realmManager = UserRealmManager()
             Utils.setIDData(this@MainActivity, "")

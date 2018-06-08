@@ -1,6 +1,5 @@
 package com.kcs.sampletodolist.module
 
-import com.kcs.sampletodolist.dto.User
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmModel

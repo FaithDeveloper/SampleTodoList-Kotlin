@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.kcs.sampletodolist.common.Constants
 import com.kcs.sampletodolist.common.Utils
-import com.kcs.sampletodolist.dto.User
+import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.join.JoinActivity
 import com.kcs.sampletodolist.module.UserRealmManager
 import com.kcs.sampletodolist.R
@@ -137,10 +137,10 @@ class LoginActivity  : AppCompatActivity() {
 
     private fun checkSaveUser() : Boolean{
 
-        val userData = realmManager.find(inputDataField[0].text.toString(), "id", User::class.java)
+        val userData = realmManager.find(inputDataField[0].text.toString(), "id", UserDTO::class.java)
 
         if(userData == null){
-            Log.d(Constants.LOG_TEST, "User Realm Data Null!!")
+            Log.d(Constants.LOG_TEST, "UserDTO Realm Data Null!!")
             return false
         }
 

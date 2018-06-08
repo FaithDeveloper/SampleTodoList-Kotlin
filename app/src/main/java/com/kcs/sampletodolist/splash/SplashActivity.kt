@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.common.Constants
 import com.kcs.sampletodolist.common.Utils
-import com.kcs.sampletodolist.dto.User
+import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.login.LoginActivity
 import com.kcs.sampletodolist.main.MainActivity
 import com.kcs.sampletodolist.module.UserRealmManager
@@ -34,8 +34,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            if(Utils.getAutoLogin(this) && realmManager.findAll(User::class.java).size > 0){
-                val user = realmManager.find(userID, "id", User::class.java)
+            if(Utils.getAutoLogin(this) && realmManager.findAll(UserDTO::class.java).size > 0){
+                val user = realmManager.find(userID, "id", UserDTO::class.java)
                 if (user?.id == userID && user?.password == userPwd){
 //                    val intent = MainActivity.newIntent(this@SplashActivity)
 //                    intent.putExtra(Constants.INTENT_DATA, userID)

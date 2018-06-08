@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
     android:background="@color/black"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_height="50dp"
         android:background="@color/enableButton"
-        android:layout_height="50dp">
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
         <TextView
             android:id="@+id/txt_id_frame"
-            android:text="@string/id"
             android:layout_width="@dimen/txt_join_title_width"
-            android:gravity="center"
-            android:textSize="@dimen/txt_join_title_size"
-            android:textColor="@color/white"
             android:layout_height="match_parent"
-            />
+            android:gravity="center"
+            android:text="@string/id"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_join_title_size" />
+
         <TextView
             android:id="@+id/txt_id"
-            android:layout_marginLeft="20dp"
-            android:layout_alignRight="@id/txt_id_frame"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignRight="@id/txt_id_frame"
+            android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_join_title_size"
             android:text="--"
-            android:layout_height="match_parent"/>
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_join_title_size" />
 
         <Button
-            android:layout_margin="8dp"
-          android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:textColor="@color/black"
-            android:background="@drawable/round_white"/>
+            android:id="@+id/btn_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_add_box_black"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
     <ListView
         android:id="@+id/list_todo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textColor="@color/white"
-        android:background="@drawable/round_light_brown"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:text="@string/logout" />
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round_light_brown"
+        android:text="@string/logout"
+        android:textColor="@color/white" />
 
 </LinearLayout>
