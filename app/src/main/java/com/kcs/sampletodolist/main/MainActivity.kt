@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         val useIdD = intent.getStringExtra(Constants.INTENT_DATA) as String
         txt_id.text = useIdD
 
+
+    }
+
+    private fun initLisetener(){
         btn_logout.setOnClickListener({
             val realmManager = UserRealmManager()
             Utils.setIDData(this@MainActivity, "")
@@ -30,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
             finish()
         })
-
     }
 
     companion object {
