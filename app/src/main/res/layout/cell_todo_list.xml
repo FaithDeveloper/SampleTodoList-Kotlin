@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:paddingTop="7.5dp"
+    android:paddingBottom="7.5dp"
+    android:paddingRight="15dp"
+    android:paddingLeft="15dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:gravity="left|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_todo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:textColor="#333333"
+            android:text="Todo..." />
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btn_delete"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_delete"/>
+</LinearLayout>

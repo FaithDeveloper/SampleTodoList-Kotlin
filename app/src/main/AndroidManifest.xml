@@ -16,17 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kcs.sampletodolist.join.JoinActivity"
+        <activity android:name="com.kcs.sampletodolist.view.join.JoinActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             />
-        <activity android:name="com.kcs.sampletodolist.login.LoginActivity"
+        <activity android:name="com.kcs.sampletodolist.view.login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             />
-        <activity android:name="com.kcs.sampletodolist.main.MainActivity"
+        <activity android:name="com.kcs.sampletodolist.view.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"

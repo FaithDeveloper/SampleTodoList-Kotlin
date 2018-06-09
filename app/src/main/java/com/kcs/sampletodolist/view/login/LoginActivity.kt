@@ -1,4 +1,4 @@
-package com.kcs.sampletodolist.login
+package com.kcs.sampletodolist.view.login
 
 import android.content.Context
 import android.content.Intent
@@ -11,10 +11,11 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.kcs.sampletodolist.common.Constants
 import com.kcs.sampletodolist.common.Utils
 import com.kcs.sampletodolist.dto.UserDTO
-import com.kcs.sampletodolist.join.JoinActivity
+import com.kcs.sampletodolist.view.join.JoinActivity
 import com.kcs.sampletodolist.module.UserRealmManager
 import com.kcs.sampletodolist.R
-import com.kcs.sampletodolist.main.MainActivity
+import com.kcs.sampletodolist.common.Preferences
+import com.kcs.sampletodolist.view.main.MainActivity
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
@@ -110,8 +111,8 @@ class LoginActivity  : AppCompatActivity() {
             if (checkSaveUser()){
                 val intent = MainActivity.newIntent(this@LoginActivity)
                 intent.putExtra(Constants.INTENT_DATA, idData ?: "")
-                Utils.setIDData(this@LoginActivity, inputDataField[0].text.toString())
-                Utils.setPWDData(this@LoginActivity, inputDataField[1].text.toString())
+                Preferences.setIDData(this@LoginActivity, inputDataField[0].text.toString())
+                Preferences.setPWDData(this@LoginActivity, inputDataField[1].text.toString())
                 startActivity(intent)
                 finish()
                 false
@@ -122,16 +123,16 @@ class LoginActivity  : AppCompatActivity() {
 
         btn_clear.setOnClickListener{
             realmManager.clear()
-            Utils.setIDData(this@LoginActivity, "")
-            Utils.setEMAILData(this@LoginActivity, "")
-            Utils.setPWDData(this@LoginActivity, "")
+            Preferences.setIDData(this@LoginActivity, "")
+            Preferences.setEMAILData(this@LoginActivity, "")
+            Preferences.setPWDData(this@LoginActivity, "")
             startActivity(JoinActivity.newIntent(this@LoginActivity))
             finish()
         }
 
-        switch_auto_login.isChecked = Utils.getAutoLogin(this@LoginActivity)
+        switch_auto_login.isChecked = Preferences.getAutoLogin(this@LoginActivity)
         switch_auto_login.setOnClickListener({
-            Utils.setAutoLogin(this@LoginActivity, switch_auto_login.isChecked)
+            Preferences.setAutoLogin(this@LoginActivity, switch_auto_login.isChecked)
         })
     }
 

@@ -1,4 +1,4 @@
-package com.kcs.sampletodolist.join
+package com.kcs.sampletodolist.view.join
 
 import android.content.Context
 import android.content.Intent

@@ -7,8 +7,8 @@ import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.common.Constants
 import com.kcs.sampletodolist.common.Utils
 import com.kcs.sampletodolist.dto.UserDTO
-import com.kcs.sampletodolist.login.LoginActivity
-import com.kcs.sampletodolist.main.MainActivity
+import com.kcs.sampletodolist.view.login.LoginActivity
+import com.kcs.sampletodolist.view.main.MainActivity
 import com.kcs.sampletodolist.module.UserRealmManager
 import org.jetbrains.anko.startActivity
 
