@@ -28,6 +28,7 @@ class TodoListFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mParam1: Bundle? = null
+    private lateinit var adapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +40,23 @@ class TodoListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        initTodoAdapter()
         initListener()
 
         return inflater.inflate(R.layout.fragment_todo_list, container, false)
+    }
+
+    private fun initTodoAdapter(){
+        adapter = TodoAdapter(activity!!.applicationContext, null, object : OnItemClickListener{
+            override fun itemClick(position: Int) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun itemDeleteClick(position: Int) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+        list_todo.adapter = adapter
     }
 
     companion object {
@@ -80,5 +95,7 @@ class TodoListFragment : Fragment() {
             activity?.finish()
         })
     }
+
+
 
 }// Required empty public constructor

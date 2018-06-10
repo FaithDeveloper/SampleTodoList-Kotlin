@@ -13,4 +13,5 @@ class TodoDTO : RealmObject() {
     open var todoID:Long = 0
     open var userID:String? = null
     open var content:String? = null
+    open var isTodo:Boolean = false
 }
