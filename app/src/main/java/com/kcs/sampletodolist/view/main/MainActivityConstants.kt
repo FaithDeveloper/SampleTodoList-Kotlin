@@ -8,6 +8,6 @@ interface MainActivityConstants {
 
     }
     interface presenter{
-        fun setUserID(id: String)
+        fun setUserIDData(id: String)
     }
 }

@@ -23,23 +23,28 @@ interface OnItemClickListener {
 class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listener: OnItemClickListener) : RecyclerView.Adapter<TodoAdapter.ViewHolder>(){
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
+    private var datas : MutableList<TodoDTO>? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.cell_todo_list, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        if(datas == null){
+            return 0
+        }
+        return datas!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if(holder == null || dataList == null){
+        if(holder == null || datas == null){
             return
         }
 
-        holder.check_todo?.isChecked = dataList[position].isTodo
+        holder.check_todo?.isChecked = datas!![position].isTodo
 
-        holder.txt_todo?.setText(dataList[position].content)
+        holder.txt_todo?.setText(datas!![position].content)
 
         holder.btn_delete?.setOnClickListener({
             listener.itemDeleteClick(position)
@@ -48,9 +53,13 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
         holder.layout_container?.setOnClickListener({
             listener.itemClick(position)
         })
+    }
 
-
-
+    fun setDataList(dataList: List<TodoDTO>?){
+        if(dataList == null){
+            return
+        }
+        this@TodoAdapter.datas = dataList.toMutableList()
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView){

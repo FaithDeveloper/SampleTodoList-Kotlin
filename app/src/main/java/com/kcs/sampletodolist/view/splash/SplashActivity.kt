@@ -5,6 +5,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.common.Constants
+import com.kcs.sampletodolist.common.Preferences
 import com.kcs.sampletodolist.common.Utils
 import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.view.login.LoginActivity
@@ -20,13 +21,13 @@ class SplashActivity : AppCompatActivity() {
     var realmManager = UserRealmManager()
 
     val userID : String by lazy {
-        Utils.getIDData(this)
+        Preferences.getIDData(this)
     }
     val userPwd : String by lazy {
-        Utils.getPWDData(this)
+        Preferences.getPWDData(this)
     }
     val userEmail : String by lazy {
-        Utils.getEMAILData(this)
+        Preferences.getEMAILData(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            if(Utils.getAutoLogin(this) && realmManager.findAll(UserDTO::class.java).size > 0){
+            if(Preferences.getAutoLogin(this) && realmManager.findAll(UserDTO::class.java).size > 0){
                 val user = realmManager.find(userID, "id", UserDTO::class.java)
                 if (user?.id == userID && user?.password == userPwd){
 //                    val intent = MainActivity.newIntent(this@SplashActivity)

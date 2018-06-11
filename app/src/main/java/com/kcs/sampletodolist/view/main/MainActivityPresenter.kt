@@ -6,7 +6,7 @@ package com.kcs.sampletodolist.view.main
 class MainActivityPresenter : MainActivityConstants.presenter{
     var userID = ""
 
-    override fun setUserID(id: String) {
+    override fun setUserIDData(id: String) {
         userID = id
     }
 }

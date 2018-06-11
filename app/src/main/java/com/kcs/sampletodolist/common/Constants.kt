@@ -13,6 +13,8 @@ class Constants {
         val INTENT_AUTO_LOGIN_DATA = "com.kcs.sampletodolist.common.constants.auto.login"
         val INTENT_TAG = "com.kcs.sampletodolist.common.constants.tag"
 
+        val ACTIVITY_REUSLT_ADD_TODO = 1
+
         val USER_TABLE_ID = "id"
 
         /** 정규식 */

@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         currentPageConstant = tag
     }
 
+    fun getUserID() : String? {
+        return userID
+    }
+
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
