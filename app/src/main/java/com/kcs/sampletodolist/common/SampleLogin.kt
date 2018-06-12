@@ -6,7 +6,7 @@ import io.realm.Realm
 /**
  * Created by kcs on 2018. 5. 27..
  */
-class SampleLogin : Application(){
+class SampleTodoList : Application(){
     override fun onCreate() {
         super.onCreate()
 

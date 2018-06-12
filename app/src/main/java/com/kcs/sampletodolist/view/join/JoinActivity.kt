@@ -79,17 +79,15 @@ class JoinActivity : AppCompatActivity() {
                 toast(getString(R.string.error_do_not_input_id))
                 return@setOnClickListener
             }
-            val user = userRealmManager.find(editID.text.toString(),Constants.USER_TABLE_ID, UserDTO::class.java)
+            val user = userRealmManager.find(editID.text.toString(), Constants.USER_TABLE_ID, UserDTO::class.java)
             if (user != null) {
                 toast(getString(R.string.error_exist_id))
                 isCheckID = false
-
             }else{
                 isCheckID = true
             }
         })
     }
-
 
     /**
      * 가장 마지막에 로그인한 유저 정보 저장

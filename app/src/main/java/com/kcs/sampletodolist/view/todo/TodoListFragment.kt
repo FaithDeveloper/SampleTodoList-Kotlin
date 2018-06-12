@@ -43,11 +43,16 @@ class TodoListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        getTodoLilst()
-        initTodoAdapter()
-        initListener()
-
         return inflater.inflate(R.layout.fragment_todo_list, container, false)
+    }
+
+    /*
+    * Kotlin Android Extensions 을 Fragment 에서 사용하려면 onViewCreated 부터 사용할 수 있습니다.
+    * */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initTodoAdapter()
+        getTodoLilst()
+        initListener()
     }
 
     private fun initTodoAdapter(){
@@ -64,6 +69,7 @@ class TodoListFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         })
+
         list_todo.adapter = adapter
 
         if (userTodo == null){
