@@ -4,6 +4,7 @@ import com.kcs.sampletodolist.dto.TodoDTO
 import com.kcs.sampletodolist.dto.UserDTO
 import io.realm.RealmConfiguration
 import io.realm.RealmModel
+import io.realm.RealmResults
 
 /**
  * Created by kcs on 2018. 5. 29..
@@ -24,6 +25,9 @@ class TodoRealmManager : RealmManager("TodoDTO.realm") {
         }
         realm.commitTransaction()
     }
+
+
+
 
     override fun clear(){
         val config = RealmConfiguration.Builder().name(name).build()

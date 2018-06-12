@@ -1,24 +1,17 @@
 package com.kcs.sampletodolist.view.todo
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.common.Constants
 import com.kcs.sampletodolist.common.Preferences
-import com.kcs.sampletodolist.common.Utils
 import com.kcs.sampletodolist.dto.TodoDTO
-import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.module.TodoRealmManager
-import com.kcs.sampletodolist.module.UserRealmManager
 import com.kcs.sampletodolist.view.login.LoginActivity
 import com.kcs.sampletodolist.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_todo_list.*
@@ -37,7 +30,7 @@ class TodoListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var mParam1: Bundle? = null
     private lateinit var adapter: TodoAdapter
-    private var realmManager = TodoRealmManager()
+    private var todoRealmManager = TodoRealmManager()
     private var userTodo: MutableList<TodoDTO>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +51,7 @@ class TodoListFragment : Fragment() {
     }
 
     private fun initTodoAdapter(){
+
         adapter = TodoAdapter(activity!!.applicationContext, userTodo, object : OnItemClickListener{
             override fun itemClick(position: Int) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -65,6 +59,9 @@ class TodoListFragment : Fragment() {
 
             override fun itemDeleteClick(position: Int) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                userTodo?.removeAt(position)
+                adapter.setDataList(userTodo)
+                adapter.notifyDataSetChanged()
             }
         })
         list_todo.adapter = adapter
@@ -104,7 +101,6 @@ class TodoListFragment : Fragment() {
     private fun initListener(){
 
         btn_logout.setOnClickListener({
-            val realmManager = UserRealmManager()
             Preferences.setIDData(this@TodoListFragment.context!!, "")
             Preferences.setEMAILData(this@TodoListFragment.context!!, "")
             Preferences.setPWDData(this@TodoListFragment.context!!, "")
@@ -120,7 +116,7 @@ class TodoListFragment : Fragment() {
     }
 
     private fun getTodoLilst(){
-        userTodo =  realmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
+        userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
         adapter.setDataList(userTodo)
     }
 
