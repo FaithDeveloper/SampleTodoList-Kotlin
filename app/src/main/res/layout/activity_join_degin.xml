@@ -8,20 +8,18 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btn_back"
             android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/white"
-            android:background="@drawable/round_light_brown"
-            android:text="@string/back"/>
+            android:background="@drawable/ic_arrow_back"/>
         <TextView
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30dp"
