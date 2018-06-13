@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +16,10 @@ import com.kcs.sampletodolist.dto.TodoDTO
 import com.kcs.sampletodolist.module.TodoRealmManager
 import com.kcs.sampletodolist.view.login.LoginActivity
 import com.kcs.sampletodolist.view.main.MainActivity
+import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 import org.jetbrains.anko.support.v4.startActivityForResult
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +35,7 @@ class TodoListFragment : Fragment() {
     private var mParam1: Bundle? = null
     private lateinit var adapter: TodoAdapter
     private var todoRealmManager = TodoRealmManager()
-    private var userTodo: MutableList<TodoDTO>? = null
+    private var userTodo: RealmResults<TodoDTO>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,18 +57,29 @@ class TodoListFragment : Fragment() {
         initTodoAdapter()
         getTodoLilst()
         initListener()
+        txt_id.text = (activity as MainActivity).getUserID()
     }
 
     private fun initTodoAdapter(){
-
+        list_todo.layoutManager = LinearLayoutManager(activity)
         adapter = TodoAdapter(activity!!.applicationContext, userTodo, object : OnItemClickListener{
             override fun itemClick(position: Int) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Log.d(Constants.LOG_TEST, "postion : " + position)
+                toast(String.format("Todo : %s", userTodo?.get(position)?.content))
             }
 
             override fun itemDeleteClick(position: Int) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                userTodo?.removeAt(position)
+                if(userTodo == null){
+                    return
+                }
+                userTodo = todoRealmManager.removeAt(position, userTodo!!)
+                adapter.setDataList(userTodo)
+                adapter.notifyDataSetChanged()
+                toast(getString(R.string.success_todo))
+            }
+
+            override fun toDoItemClick(isChecked: Boolean, position: Int) {
+                userTodo = todoRealmManager.updateCheckUseData(isChecked, position, userTodo!!)
                 adapter.setDataList(userTodo)
                 adapter.notifyDataSetChanged()
             }
@@ -124,6 +139,7 @@ class TodoListFragment : Fragment() {
     private fun getTodoLilst(){
         userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
         adapter.setDataList(userTodo)
+        adapter.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -134,16 +150,19 @@ class TodoListFragment : Fragment() {
 
         when (requestCode){
             Constants.ACTIVITY_REUSLT_ADD_TODO -> {
-                var todoDTO = TodoDTO()
-                val getTodo = data?.getStringExtra(Constants.INTENT_DATA) ?: ""
-                if(getTodo.isEmpty()){
-                    return
-                }
-                todoDTO.todoID = System.currentTimeMillis()
-                todoDTO.isTodo = false
-                todoDTO.userID = (activity as MainActivity).getUserID()
-                todoDTO.content = getTodo
-                userTodo?.add(todoDTO)
+//                var todoDTO = TodoDTO()
+//                val getTodo = data?.getStringExtra(Constants.INTENT_DATA) ?: ""
+//                if(getTodo.isEmpty()){
+//                    return
+//                }
+//                todoDTO.todoID = System.currentTimeMillis()
+//                todoDTO.isTodo = false
+//                todoDTO.userID = (activity as MainActivity).getUserID()
+//                todoDTO.content = getTodo
+//                userTodo?.add(todoDTO)
+//                adapter.setDataList(userTodo)
+//                adapter.notifyDataSetChanged()
+                userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
                 adapter.setDataList(userTodo)
                 adapter.notifyDataSetChanged()
             }

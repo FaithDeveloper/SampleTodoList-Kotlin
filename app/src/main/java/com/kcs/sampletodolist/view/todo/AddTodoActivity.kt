@@ -1,5 +1,6 @@
 package com.kcs.sampletodolist.view.todo
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -35,10 +36,13 @@ class AddTodoActivity : AppCompatActivity() {
         btn_done.setOnClickListener({
             var todoRealmManager = TodoRealmManager()
             var todo = TodoDTO()
+            todo.todoID = System.currentTimeMillis()
             todo.userID = userID
             todo.content =  editToDoText.text.toString()
             todo.isTodo = false
             todoRealmManager.insertTodo(TodoDTO::class.java, todo)
+            setResult(Activity.RESULT_OK)
+            finish()
         })
         btn_cancel.setOnClickListener({
             finish()

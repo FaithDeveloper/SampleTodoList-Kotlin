@@ -26,10 +26,10 @@
             android:id="@+id/txt_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignRight="@id/txt_id_frame"
+            android:layout_toRightOf="@id/txt_id_frame"
             android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:text="--"
+            android:text="ssdfdsfdsfdsfdsf"
             android:textColor="@color/white"
             android:textSize="@dimen/txt_join_title_size" />
 
@@ -39,7 +39,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_add_box_black"
+            android:background="@drawable/ic_add_box"
             android:textColor="@color/black" />
     </RelativeLayout>
 
@@ -51,12 +51,12 @@
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/round_light_brown"
+        android:background="@drawable/top_round_light_brown"
         android:text="@string/logout"
         android:textColor="@color/white" />
 

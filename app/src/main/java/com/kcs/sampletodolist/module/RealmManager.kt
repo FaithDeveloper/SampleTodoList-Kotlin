@@ -4,6 +4,7 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmModel
 import io.realm.RealmResults
+import io.realm.kotlin.deleteFromRealm
 
 /**
  * Created by kcs on 2018. 5. 27..
@@ -55,4 +56,24 @@ open class RealmManager(val name: String) {
         return realm.where(targetDto).equalTo(key, value).findAll()
     }
 
+    fun <T: RealmModel> removeAt(position:Int, dataList: RealmResults<T>): RealmResults<T>{
+        if(position >= 0 && position < dataList.size){
+            realm.beginTransaction()
+            dataList[position]?.deleteFromRealm()
+            realm.commitTransaction()
+        }
+
+        return dataList
+    }
+
+    fun <T: RealmModel> removeAt(value: String, key: String, position:Int, targetDto: Class<T>): RealmResults<T>{
+        var dataList = realm.where(targetDto).equalTo(key, value).findAll()
+        if(position >= 0 && position < dataList.size){
+            realm.beginTransaction()
+            dataList[position]?.deleteFromRealm()
+            realm.commitTransaction()
+        }
+
+        return dataList
+    }
 }

@@ -40,8 +40,18 @@ class LoginActivity  : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         init()
-        initObservable()
         setListener()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // 관리하고 있던 디스포저블 객체를 모두 해제합니다.
+        viewDisposables.clear()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initObservable()
     }
 
     companion object {
@@ -164,9 +174,5 @@ class LoginActivity  : AppCompatActivity() {
         return true
     }
 
-    override fun onStop() {
-        super.onStop()
-        // 관리하고 있던 디스포저블 객체를 모두 해제합니다.
-        viewDisposables.clear()
-    }
+
 }

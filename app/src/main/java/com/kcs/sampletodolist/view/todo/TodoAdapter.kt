@@ -18,6 +18,7 @@ import com.kcs.sampletodolist.dto.TodoDTO
 interface OnItemClickListener {
     fun itemClick(position: Int)
     fun itemDeleteClick(position: Int)
+    fun toDoItemClick(isChecked: Boolean,position:Int)
 }
 
 class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listener: OnItemClickListener) : RecyclerView.Adapter<TodoAdapter.ViewHolder>(){
@@ -43,6 +44,9 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
         }
 
         holder.check_todo?.isChecked = datas!![position].isTodo
+        holder.check_todo?.setOnClickListener({
+            listener.toDoItemClick( holder.check_todo?.isChecked, position)
+        })
 
         holder.txt_todo?.setText(datas!![position].content)
 

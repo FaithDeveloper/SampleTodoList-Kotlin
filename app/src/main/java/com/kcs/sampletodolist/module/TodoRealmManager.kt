@@ -15,10 +15,8 @@ class TodoRealmManager : RealmManager("TodoDTO.realm") {
         realm.beginTransaction()
 
         //PrimaryKey 증가해서 넣어주는 것이 중요!!
-        var nextNum : Long = realm.where(targetDto).count() +1
-        val account = realm.createObject(targetDto, nextNum)
+        val account = realm.createObject(targetDto, dto.todoID)
         if(account is TodoDTO){
-            account.todoID = System.currentTimeMillis()
             account.userID = dto.userID
             account.content = dto.content
             account.isTodo = dto.isTodo
@@ -27,7 +25,15 @@ class TodoRealmManager : RealmManager("TodoDTO.realm") {
     }
 
 
+    fun <T: TodoDTO> updateCheckUseData(isCheck: Boolean, position:Int, dataList: RealmResults<T>): RealmResults<T>{
+        if(position >= 0 && position < dataList.size){
+            realm.beginTransaction()
+            dataList?.get(position)?.isTodo = isCheck
+            realm.commitTransaction()
+        }
 
+        return dataList
+    }
 
     override fun clear(){
         val config = RealmConfiguration.Builder().name(name).build()

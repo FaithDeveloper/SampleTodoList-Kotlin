@@ -57,7 +57,6 @@ class JoinActivity : AppCompatActivity() {
         textInputLayoutArray = arrayOf(editIDLayout, editPWDLayout, editPWDConfirmLayout, editEmailLayout)
         inputInfoMessage = arrayOf(getString(R.string.txtInputInfoID), getString(R.string.txtInputInfoPWD), getString(R.string.txtInputInfoRePWD), getString(R.string.error_discorrent_email))
 
-        typingListener()
     }
 
     private fun setListener() {
@@ -86,6 +85,10 @@ class JoinActivity : AppCompatActivity() {
             }else{
                 isCheckID = true
             }
+        })
+
+        btn_back.setOnClickListener({
+            finish()
         })
     }
 
@@ -206,6 +209,13 @@ class JoinActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        typingListener()
+    }
+
+    // disposable 을 했을 경우 갖고있는 overable 초기화 되므로 onResume 에서 해당 데이터를 가져올 수 있도록 해야한다.
     override fun onStop() {
         super.onStop()
         viewDisposables.clear()
