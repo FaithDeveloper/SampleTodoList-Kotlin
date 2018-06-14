@@ -26,11 +26,17 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
 
     private var datas : MutableList<TodoDTO>? = null
 
+    /**
+     * View Holder 연결
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.cell_todo_list, parent, false)
         return ViewHolder(view)
     }
 
+    /**
+     * Recycler 에 표시할 셀 갯수
+     */
     override fun getItemCount(): Int {
         if(datas == null){
             return 0
@@ -38,6 +44,9 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
         return datas!!.size
     }
 
+    /**
+     * View가 Bind 되었을 때 설정
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(holder == null || datas == null){
             return
@@ -59,6 +68,9 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
         })
     }
 
+    /**
+     * 데이터 업데이트
+     */
     fun setDataList(dataList: List<TodoDTO>?){
         if(dataList == null){
             return
@@ -66,6 +78,9 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
         this@TodoAdapter.datas = dataList.toMutableList()
     }
 
+    /**
+     * ViewHolder
+     * */
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView){
         val layout_container= itemView?.findViewById<LinearLayout>(R.id.layout_container)
         val check_todo = itemView?.findViewById<CheckBox>(R.id.check_todo)

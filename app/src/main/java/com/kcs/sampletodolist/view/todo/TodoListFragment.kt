@@ -55,12 +55,13 @@ class TodoListFragment : Fragment() {
     * */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initTodoAdapter()
-        getTodoLilst()
+        getTodoList()
         initListener()
         txt_id.text = (activity as MainActivity).getUserID()
     }
 
     private fun initTodoAdapter(){
+        // 중요!! RecyclerView을 사용 시 어떤 형태의 Recycler을 할지 설정해야한다.
         list_todo.layoutManager = LinearLayoutManager(activity)
         adapter = TodoAdapter(activity!!.applicationContext, userTodo, object : OnItemClickListener{
             override fun itemClick(position: Int) {
@@ -92,8 +93,6 @@ class TodoListFragment : Fragment() {
         }else{
             adapter.notifyDataSetChanged()
         }
-
-
     }
 
     companion object {
@@ -120,7 +119,7 @@ class TodoListFragment : Fragment() {
     }
 
     private fun initListener(){
-
+        // 로그아웃
         btn_logout.setOnClickListener({
             Preferences.setIDData(this@TodoListFragment.context!!, "")
             Preferences.setEMAILData(this@TodoListFragment.context!!, "")
@@ -131,37 +130,28 @@ class TodoListFragment : Fragment() {
             activity?.finish()
         })
 
+        //Activity Result을 활용한 데이터 갱신
         btn_add.setOnClickListener({
             startActivityForResult<AddTodoActivity>(Constants.ACTIVITY_REUSLT_ADD_TODO, Constants.INTENT_DATA to (activity as MainActivity).getUserID())
         })
     }
 
-    private fun getTodoLilst(){
+    /**
+     * Realm에 저장된 데이터를 RecyclerView 에 표시
+     * */
+    private fun getTodoList(){
         userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
         adapter.setDataList(userTodo)
         adapter.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
         if(resultCode != Activity.RESULT_OK){
             return
         }
 
         when (requestCode){
             Constants.ACTIVITY_REUSLT_ADD_TODO -> {
-//                var todoDTO = TodoDTO()
-//                val getTodo = data?.getStringExtra(Constants.INTENT_DATA) ?: ""
-//                if(getTodo.isEmpty()){
-//                    return
-//                }
-//                todoDTO.todoID = System.currentTimeMillis()
-//                todoDTO.isTodo = false
-//                todoDTO.userID = (activity as MainActivity).getUserID()
-//                todoDTO.content = getTodo
-//                userTodo?.add(todoDTO)
-//                adapter.setDataList(userTodo)
-//                adapter.notifyDataSetChanged()
                 userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
                 adapter.setDataList(userTodo)
                 adapter.notifyDataSetChanged()
