@@ -40,9 +40,14 @@ class MainActivity : AppCompatActivity() {
 
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
 
-        if (tag == PageConstant.TODO) {
-            todoListFragment = TodoListFragment.newInstance(intentBundle)
-            ft.replace(R.id.content_view, todoListFragment).setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit()
+        when (tag){
+            PageConstant .TODO -> {
+                todoListFragment = TodoListFragment.newInstance(intentBundle)
+                ft.replace(R.id.content_view, todoListFragment).setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit()
+            }
+            PageConstant.SETTING -> {
+
+            }
         }
 
         currentPageConstant = tag
