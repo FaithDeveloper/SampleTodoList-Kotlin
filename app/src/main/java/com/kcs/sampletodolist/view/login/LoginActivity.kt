@@ -2,6 +2,8 @@ package com.kcs.sampletodolist.view.login
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -28,7 +30,8 @@ import org.jetbrains.anko.toast
 class LoginActivity  : AppCompatActivity() {
     lateinit var inputDataField : Array<EditText>
 
-    var idData : String? = null
+    var idData = ""
+    var emailData = ""
     var realmManager = UserRealmManager()
 
     // 여러 디스포저블 객체를 관리할 수 있는 CompositeDisposable 객체를 초기화 합니다.
@@ -103,6 +106,7 @@ class LoginActivity  : AppCompatActivity() {
     private fun init(){
         inputDataField = arrayOf(editID, editPWD)
         supportActionBar?.title = getString(R.string.login)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3A99D9")))
     }
 
     private fun setListener(){
@@ -120,9 +124,11 @@ class LoginActivity  : AppCompatActivity() {
 
             if (checkSaveUser()){
                 val intent = MainDrawerActivity.newIntent(this@LoginActivity)
-                intent.putExtra(Constants.INTENT_DATA, idData ?: "")
+                intent.putExtra(Constants.INTENT_ID_DATA, idData )
+                intent.putExtra(Constants.INTENT_EMAIL_DATA, emailData)
                 Preferences.setIDData(this@LoginActivity, inputDataField[0].text.toString())
                 Preferences.setPWDData(this@LoginActivity, inputDataField[1].text.toString())
+                Preferences.setEMAILData(this@LoginActivity, emailData)
                 startActivity(intent)
                 finish()
                 false
@@ -163,6 +169,7 @@ class LoginActivity  : AppCompatActivity() {
                         return false
                     }else{
                         idData = field.text.toString()
+                        emailData = userData.email ?: ""
                     }
                 }
                 R.id.editPWD ->

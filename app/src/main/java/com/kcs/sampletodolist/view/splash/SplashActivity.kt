@@ -41,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
 //                    intent.putExtra(Constants.INTENT_DATA, userID)
 //                    startActivity(intent)
                     //anko 의 StartActivity에 intent data 삽입
-                    startActivity<MainDrawerActivity>(Constants.INTENT_DATA to userID)
+                    startActivity<MainDrawerActivity>(Constants.INTENT_ID_DATA to userID, Constants.INTENT_EMAIL_DATA to Preferences.getEMAILData(this))
                     finish()
                     return@postDelayed
                 }

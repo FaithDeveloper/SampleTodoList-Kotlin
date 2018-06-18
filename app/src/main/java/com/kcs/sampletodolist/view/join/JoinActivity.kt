@@ -2,6 +2,8 @@ package com.kcs.sampletodolist.view.join
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.NavUtils
@@ -99,6 +101,8 @@ class JoinActivity : AppCompatActivity() {
         //ActionBar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.join)
+
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3A99D9")))
     }
 
     private fun setListener() {

@@ -33,7 +33,16 @@
         <activity
             android:name=".view.main.MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.todo.AddTodoActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".view.main.MainDrawerActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.main.MainDrawerActivity" />
+        </activity>
     </application>
 
 </manifest>

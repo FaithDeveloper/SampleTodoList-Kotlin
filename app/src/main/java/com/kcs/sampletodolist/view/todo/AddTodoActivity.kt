@@ -1,6 +1,8 @@
 package com.kcs.sampletodolist.view.todo
 
 import android.app.Activity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,19 +23,21 @@ class AddTodoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_todo)
 
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3A99D9")))
+
         userID = intent.getStringExtra(Constants.INTENT_DATA) ?: ""
 
         RxTextView.textChangeEvents(editToDoText)
                 .map { t -> t.text().isNotEmpty() }
-                .subscribe({
+                .subscribe{
                     btn_done.isEnabled = it
-                })
+                }
 
         initListener()
     }
 
     private fun initListener(){
-        btn_done.setOnClickListener({
+        btn_done.setOnClickListener{
             var todoRealmManager = TodoRealmManager()
             var todo = TodoDTO()
             todo.todoID = System.currentTimeMillis()
@@ -43,9 +47,9 @@ class AddTodoActivity : AppCompatActivity() {
             todoRealmManager.insertTodo(TodoDTO::class.java, todo)
             setResult(Activity.RESULT_OK)
             finish()
-        })
-        btn_cancel.setOnClickListener({
+        }
+        btn_cancel.setOnClickListener{
             finish()
-        })
+        }
     }
 }

@@ -56,8 +56,6 @@ class TodoListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initTodoAdapter()
         getTodoList()
-        initListener()
-        txt_id.text = (activity as MainDrawerActivity).getUserID()
     }
 
     private fun initTodoAdapter(){
@@ -115,13 +113,6 @@ class TodoListFragment : Fragment() {
 //            args.putString(ARG_PARAM1, param1)
             fragment.arguments = args
             return fragment
-        }
-    }
-
-    private fun initListener(){
-        //Activity Result을 활용한 데이터 갱신
-        btn_add.setOnClickListener{
-            startActivityForResult<AddTodoActivity>(Constants.ACTIVITY_REUSLT_ADD_TODO, Constants.INTENT_DATA to (activity as MainDrawerActivity).getUserID())
         }
     }
 
