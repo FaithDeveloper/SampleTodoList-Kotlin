@@ -9,13 +9,12 @@ import android.widget.EditText
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.kcs.sampletodolist.common.Constants
-import com.kcs.sampletodolist.common.Utils
 import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.view.join.JoinActivity
 import com.kcs.sampletodolist.module.UserRealmManager
 import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.common.Preferences
-import com.kcs.sampletodolist.view.main.MainActivity
+import com.kcs.sampletodolist.view.main.MainDrawerActivity
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
@@ -103,6 +102,7 @@ class LoginActivity  : AppCompatActivity() {
 
     private fun init(){
         inputDataField = arrayOf(editID, editPWD)
+        supportActionBar?.title = getString(R.string.login)
     }
 
     private fun setListener(){
@@ -119,7 +119,7 @@ class LoginActivity  : AppCompatActivity() {
 //                startActivity(intent)
 
             if (checkSaveUser()){
-                val intent = MainActivity.newIntent(this@LoginActivity)
+                val intent = MainDrawerActivity.newIntent(this@LoginActivity)
                 intent.putExtra(Constants.INTENT_DATA, idData ?: "")
                 Preferences.setIDData(this@LoginActivity, inputDataField[0].text.toString())
                 Preferences.setPWDData(this@LoginActivity, inputDataField[1].text.toString())
@@ -141,9 +141,9 @@ class LoginActivity  : AppCompatActivity() {
         }
 
         switch_auto_login.isChecked = Preferences.getAutoLogin(this@LoginActivity)
-        switch_auto_login.setOnClickListener({
+        switch_auto_login.setOnClickListener{
             Preferences.setAutoLogin(this@LoginActivity, switch_auto_login.isChecked)
-        })
+        }
     }
 
     private fun checkSaveUser() : Boolean{

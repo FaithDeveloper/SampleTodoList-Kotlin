@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
+import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.widget.EditText
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.kcs.sampletodolist.common.Constants
@@ -43,6 +45,25 @@ class JoinActivity : AppCompatActivity() {
 
     private lateinit var userRealmManager: UserRealmManager
 
+    /** =======================================
+     *
+     * Override Method
+     *
+     *  =======================================
+     */
+
+    override fun onResume() {
+        super.onResume()
+
+        typingListener()
+    }
+
+    // disposable 을 했을 경우 갖고있는 overable 초기화 되므로 onResume 에서 해당 데이터를 가져올 수 있도록 해야한다.
+    override fun onStop() {
+        super.onStop()
+        viewDisposables.clear()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join_degin)
@@ -52,11 +73,32 @@ class JoinActivity : AppCompatActivity() {
         setListener()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.groupId){
+            android.R.id.home -> {
+                NavUtils.navigateUpFromSameTask(this)
+                return true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    /** =======================================
+     *
+     * Make Function
+     *
+     * ========================================*/
+
     private fun init() {
         inputDataField = arrayOf(editID, editPWD, editPWDConfirm, editEmail)
         textInputLayoutArray = arrayOf(editIDLayout, editPWDLayout, editPWDConfirmLayout, editEmailLayout)
         inputInfoMessage = arrayOf(getString(R.string.txtInputInfoID), getString(R.string.txtInputInfoPWD), getString(R.string.txtInputInfoRePWD), getString(R.string.error_discorrent_email))
 
+        //ActionBar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.join)
     }
 
     private fun setListener() {
@@ -72,7 +114,7 @@ class JoinActivity : AppCompatActivity() {
 
         }
 
-        btnCheckExistID.setOnClickListener({
+        btnCheckExistID.setOnClickListener {
             if(editID.text.toString().isEmpty()){
                 isCheckID = false
                 toast(getString(R.string.error_do_not_input_id))
@@ -85,11 +127,8 @@ class JoinActivity : AppCompatActivity() {
             }else{
                 isCheckID = true
             }
-        })
+        }
 
-        btn_back.setOnClickListener({
-            finish()
-        })
     }
 
     /**
@@ -209,15 +248,8 @@ class JoinActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
 
-        typingListener()
-    }
 
-    // disposable 을 했을 경우 갖고있는 overable 초기화 되므로 onResume 에서 해당 데이터를 가져올 수 있도록 해야한다.
-    override fun onStop() {
-        super.onStop()
-        viewDisposables.clear()
-    }
+
+
 }

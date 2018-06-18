@@ -107,7 +107,7 @@ private fun initTodoAdapter(){
 
 ```kotlin
  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        txt_id.text = (activity as MainActivity).getUserID()
+        txt_id.text = (activity as MainDrawerActivity).getUserID()
     }
 ```
 

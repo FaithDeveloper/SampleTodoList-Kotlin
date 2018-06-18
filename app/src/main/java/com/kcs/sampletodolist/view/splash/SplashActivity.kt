@@ -6,11 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.common.Constants
 import com.kcs.sampletodolist.common.Preferences
-import com.kcs.sampletodolist.common.Utils
 import com.kcs.sampletodolist.dto.UserDTO
 import com.kcs.sampletodolist.view.login.LoginActivity
-import com.kcs.sampletodolist.view.main.MainActivity
 import com.kcs.sampletodolist.module.UserRealmManager
+import com.kcs.sampletodolist.view.main.MainDrawerActivity
 import org.jetbrains.anko.startActivity
 
 
@@ -42,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
 //                    intent.putExtra(Constants.INTENT_DATA, userID)
 //                    startActivity(intent)
                     //anko 의 StartActivity에 intent data 삽입
-                    startActivity<MainActivity>(Constants.INTENT_DATA to userID)
+                    startActivity<MainDrawerActivity>(Constants.INTENT_DATA to userID)
                     finish()
                     return@postDelayed
                 }

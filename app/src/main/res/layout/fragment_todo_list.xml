@@ -49,16 +49,4 @@
         android:layout_height="0dp"
         tools:listitem = "@layout/cell_todo_list"
         android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/top_round_light_brown"
-        android:text="@string/logout"
-        android:textColor="@color/white" />
-
 </LinearLayout>

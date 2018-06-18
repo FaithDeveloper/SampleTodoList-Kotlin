@@ -7,48 +7,24 @@
     android:gravity="center_horizontal"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_marginTop="15dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/editIDLayout"
+        android:textColorHint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_margin="10dp"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_arrow_back"/>
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="@color/white"
-            android:text="@string/join_name"
-            />
-    </FrameLayout>
 
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/editIDLayout"
-            android:textColorHint="@color/white"
+        <EditText
+            android:hint="@string/id"
+            android:id="@+id/editID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:hint="@string/id"
-                android:id="@+id/editID"
-                android:layout_width="match_parent"
-                android:backgroundTint="@color/white"
-                android:maxLines="1"
-                android:maxLength="12"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:layout_height="match_parent"
-                />
-        </android.support.design.widget.TextInputLayout>
+            android:backgroundTint="@color/white"
+            android:maxLines="1"
+            android:maxLength="12"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btnCheckExistID"

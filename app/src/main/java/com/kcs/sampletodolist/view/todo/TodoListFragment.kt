@@ -15,7 +15,7 @@ import com.kcs.sampletodolist.common.Preferences
 import com.kcs.sampletodolist.dto.TodoDTO
 import com.kcs.sampletodolist.module.TodoRealmManager
 import com.kcs.sampletodolist.view.login.LoginActivity
-import com.kcs.sampletodolist.view.main.MainActivity
+import com.kcs.sampletodolist.view.main.MainDrawerActivity
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 import org.jetbrains.anko.support.v4.startActivityForResult
@@ -57,7 +57,7 @@ class TodoListFragment : Fragment() {
         initTodoAdapter()
         getTodoList()
         initListener()
-        txt_id.text = (activity as MainActivity).getUserID()
+        txt_id.text = (activity as MainDrawerActivity).getUserID()
     }
 
     private fun initTodoAdapter(){
@@ -119,30 +119,23 @@ class TodoListFragment : Fragment() {
     }
 
     private fun initListener(){
-        // 로그아웃
-        btn_logout.setOnClickListener({
-            Preferences.setIDData(this@TodoListFragment.context!!, "")
-            Preferences.setEMAILData(this@TodoListFragment.context!!, "")
-            Preferences.setPWDData(this@TodoListFragment.context!!, "")
-            Preferences.setAutoLogin(this@TodoListFragment.context!!, false)
-            startActivity(LoginActivity.newIntent(this@TodoListFragment.context!!))
-
-            activity?.finish()
-        })
-
         //Activity Result을 활용한 데이터 갱신
-        btn_add.setOnClickListener({
-            startActivityForResult<AddTodoActivity>(Constants.ACTIVITY_REUSLT_ADD_TODO, Constants.INTENT_DATA to (activity as MainActivity).getUserID())
-        })
+        btn_add.setOnClickListener{
+            startActivityForResult<AddTodoActivity>(Constants.ACTIVITY_REUSLT_ADD_TODO, Constants.INTENT_DATA to (activity as MainDrawerActivity).getUserID())
+        }
     }
 
     /**
      * Realm에 저장된 데이터를 RecyclerView 에 표시
      * */
     private fun getTodoList(){
-        userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
-        adapter.setDataList(userTodo)
-        adapter.notifyDataSetChanged()
+        try {
+            userTodo = todoRealmManager.findAll((activity as MainDrawerActivity).getUserID()!!, "userID", TodoDTO::class.java)
+            adapter.setDataList(userTodo)
+            adapter.notifyDataSetChanged()
+        }catch (e: NullPointerException){
+            e.printStackTrace()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -152,7 +145,7 @@ class TodoListFragment : Fragment() {
 
         when (requestCode){
             Constants.ACTIVITY_REUSLT_ADD_TODO -> {
-                userTodo =  todoRealmManager.findAll((activity as MainActivity).getUserID()!!, "userID", TodoDTO::class.java)
+                userTodo =  todoRealmManager.findAll((activity as MainDrawerActivity).getUserID()!!, "userID", TodoDTO::class.java)
                 adapter.setDataList(userTodo)
                 adapter.notifyDataSetChanged()
             }
