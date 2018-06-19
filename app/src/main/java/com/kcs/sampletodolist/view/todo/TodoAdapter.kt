@@ -11,6 +11,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.kcs.sampletodolist.R
 import com.kcs.sampletodolist.dto.TodoDTO
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * Created by kcs on 2018. 6. 9..
@@ -59,6 +63,10 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
 
         holder.txt_todo?.setText(datas!![position].content)
 
+        val current = datas!![position].todoID
+         val formatter = SimpleDateFormat("yyy-MM-dd HH:mm:ss")
+        holder.txt_date?.setText(formatter.format(current))
+
         holder.btn_delete?.setOnClickListener({
             listener.itemDeleteClick(position)
         })
@@ -86,5 +94,6 @@ class TodoAdapter(val context: Context, val dataList: List<TodoDTO>?, val listen
         val check_todo = itemView?.findViewById<CheckBox>(R.id.check_todo)
         val txt_todo = itemView?.findViewById<TextView>(R.id.txt_todo)
         val btn_delete = itemView?.findViewById<Button>(R.id.btn_delete)
+        val txt_date = itemView?.findViewById<TextView>(R.id.txt_date)
     }
 }

@@ -33,8 +33,20 @@
                 android:gravity="left|center_vertical"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:textSize="15dp"
                 android:text="Todo..."
                 android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="10dp"
+                android:text="Todo..."
+                android:textColor="@color/gray" />
         </LinearLayout>
 
         <Button
