@@ -94,10 +94,11 @@ class MainDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.action_todo -> {
-                // Handle the camera action
+                // Handle the Todo_action
                 replaceFragment(PageConstant.TODO, null)
             }
             R.id.action_setting -> {
+                // Handle the Setting action
                 replaceFragment(PageConstant.SETTING, null)
             }
         }
