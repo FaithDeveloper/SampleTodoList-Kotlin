@@ -2,6 +2,21 @@
 
  `리스트`로 구성된 Sample TodoList 프로젝트는 `RecyclerView` 을 활용하여 만들었습니다.
 
+<br/>
+
+## TodoList Sample Code 요구사항
+
+```
+1. Realm 으로 회원 관리를 합니다.
+2. Realm 으로 등록된 회원은 각자의 Todo 를 갖고 있습니다.
+3. Todo를 작성화면에서 TodoList 화면으로 전환 시 추가된 데이터가 보입니다.
+4. Todo 삭제는 실시간으로 Realm에 반영되어야 합니다.
+5. Todo 한 것은 CheckBox로 표시할 수 있으며 체크는 남아있습니다.
+6. Fragment을 통한 화면구성 합니다.
+```
+
+<br/>
+
 ## RecyclerView
 
 RecyclerView는 ViewGroup의 서브 클래스로, 자식 View 객체들의 리스트를 보여줍니다. 이때 리스트의 각 항목이 하나의 자식 View 객체가 됩니다. 리스트에 있는 모든 항목에 대해 하나씩 생성한다면 100개, 1000개의 항목을 갖은 리스트인 경우 정상적으로 실행 될 수 없습니다. RecyclerView는 한 화면에 모든 자식 View을 생성하는 것이 아니라 한 화면을 채우는데 충분한 12개만 생성합니다. (화면 구성에 따라 달라질 수 있습니다.) 그리고 화면이 스크롤되면서 View가 화면을 벗어날 때 RecyclerView는 그 View을 버리지 않고 재활용합니다. 이름 그대로 RecyclerView는 끊임없이 View을 재활용 합니다.
@@ -80,19 +95,6 @@ private fun initTodoAdapter(){
         list_todo.adapter = adapter
         // ...
     }
-```
-
-<br/>
-
-## TodoList Sample Code 요구사항 
-
-```
-1. Realm 으로 회원 관리를 합니다.
-2. Realm 으로 등록된 회원은 각자의 Todo 를 갖고 있습니다.
-3. Todo를 작성화면에서 TodoList 화면으로 전환 시 추가된 데이터가 보입니다.
-4. Todo 삭제는 실시간으로 Realm에 반영되어야 합니다.
-5. Todo 한 것은 CheckBox로 표시할 수 있으며 체크는 남아있습니다.
-6. Fragment을 통한 화면구성 합니다.
 ```
 
 <br/>
