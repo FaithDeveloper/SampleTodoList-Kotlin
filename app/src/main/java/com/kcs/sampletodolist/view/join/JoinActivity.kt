@@ -76,7 +76,7 @@ class JoinActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.groupId){
+        when (item?.itemId){
             android.R.id.home -> {
                 NavUtils.navigateUpFromSameTask(this)
                 return true

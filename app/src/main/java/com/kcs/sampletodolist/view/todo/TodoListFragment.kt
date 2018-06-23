@@ -122,6 +122,9 @@ class TodoListFragment : Fragment() {
     private fun getTodoList(){
         try {
             userTodo = todoRealmManager.findAll((activity as MainDrawerActivity).getUserID()!!, "userID", TodoDTO::class.java)
+            if (userTodo == null){
+                return
+            }
             adapter.setDataList(userTodo)
             adapter.notifyDataSetChanged()
         }catch (e: NullPointerException){
@@ -137,6 +140,9 @@ class TodoListFragment : Fragment() {
         when (requestCode){
             Constants.ACTIVITY_REUSLT_ADD_TODO -> {
                 userTodo =  todoRealmManager.findAll((activity as MainDrawerActivity).getUserID()!!, "userID", TodoDTO::class.java)
+                if(userTodo == null){
+                    return
+                }
                 adapter.setDataList(userTodo)
                 adapter.notifyDataSetChanged()
             }

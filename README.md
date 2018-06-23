@@ -266,7 +266,7 @@ supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 ```kotlin
 override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.groupId){
+    when (item?.itemId){
         android.R.id.home -> {
             NavUtils.navigateUpFromSameTask(this)
             return true
@@ -277,6 +277,10 @@ override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     }
 }
 ```
+
+> **'Back Button' 구현 시 주의사항**
+>
+> `Back Button` 클릭 시 `onOptionsItemSelected()` 을 호출하게 됩니다. 여기서 `item?itemID` 로 `android.R.id.home` 을 비교해야지 `item?groupID` 로 비교하면 안됩니다. 알게모르게 실수 할 수 있는 부분이라서 주의해주세요.
 
 <br/>
 

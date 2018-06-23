@@ -193,7 +193,6 @@ class MainDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         nav_view.setNavigationItemSelectedListener(this)
         replaceFragment(PageConstant.TODO, null)
 
-
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3A99D9")))
     }
 }

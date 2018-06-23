@@ -52,7 +52,10 @@ open class RealmManager(val name: String) {
     /**
      * T로 받은 RealModel 데이터에서 모든 값을 리턴
      */
-    fun <T: RealmModel> findAll(value: String, key: String, targetDto: Class<T>): RealmResults<T>{
+    fun <T: RealmModel> findAll(value: String, key: String, targetDto: Class<T>): RealmResults<T>?{
+        if (realm.where(targetDto).equalTo(key, value).findAll().size == 0) {
+            return null
+        }
         return realm.where(targetDto).equalTo(key, value).findAll()
     }
 
