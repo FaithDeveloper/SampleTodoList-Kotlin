@@ -1,5 +1,7 @@
 package com.kcs.sampletodolist.module
 
+import android.util.Log
+import com.kcs.sampletodolist.common.Constants
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmModel
@@ -39,6 +41,7 @@ open class RealmManager(val name: String) {
      * T로 받은 RealModel 데이터에서 key,value 값을 가진 데이터를 찾습니다
      */
     fun <T : RealmModel> find(value: String, key: String, targetDto: Class<T>): T? {
+        Log.e(Constants.LOG_TEST, "realm address : " + realm.path)
         return realm.where(targetDto).equalTo(key, value).findFirst()
     }
 
@@ -46,6 +49,7 @@ open class RealmManager(val name: String) {
      * T로 받은 RealModel 데이터에서 모든 값을 리턴
      */
     fun <T: RealmModel> findAll(targetDto: Class<T>): RealmResults<T>{
+        Log.e(Constants.LOG_TEST, "realm address : " + realm.path)
         return realm.where(targetDto).findAll()
     }
 
@@ -53,6 +57,7 @@ open class RealmManager(val name: String) {
      * T로 받은 RealModel 데이터에서 모든 값을 리턴
      */
     fun <T: RealmModel> findAll(value: String, key: String, targetDto: Class<T>): RealmResults<T>?{
+        Log.e(Constants.LOG_TEST, "realm address : " + realm.path)
         if (realm.where(targetDto).equalTo(key, value).findAll().size == 0) {
             return null
         }

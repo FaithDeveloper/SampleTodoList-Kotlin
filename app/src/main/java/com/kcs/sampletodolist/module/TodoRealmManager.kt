@@ -47,4 +47,5 @@ class TodoRealmManager : RealmManager("TodoDTO.realm") {
             realm.close()
         }
     }
+
 }
